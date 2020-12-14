@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchangeDomain", "CurrencyExchangeDomain\CurrencyExchangeDomain.csproj", "{C245FAF0-803B-4AD9-A0F0-A53B50396C8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyExchangeOffice.Tests", "CurrencyExchangeOffice.Tests\CurrencyExchangeOffice.Tests.csproj", "{6C7A5EDD-2E0E-4FD4-A840-2AB0F77A4966}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C245FAF0-803B-4AD9-A0F0-A53B50396C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C245FAF0-803B-4AD9-A0F0-A53B50396C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C245FAF0-803B-4AD9-A0F0-A53B50396C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C7A5EDD-2E0E-4FD4-A840-2AB0F77A4966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C7A5EDD-2E0E-4FD4-A840-2AB0F77A4966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C7A5EDD-2E0E-4FD4-A840-2AB0F77A4966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7A5EDD-2E0E-4FD4-A840-2AB0F77A4966}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
