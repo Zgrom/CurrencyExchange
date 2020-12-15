@@ -5,7 +5,7 @@ using Xunit;
 
 namespace CurrencyExchangeOffice.Tests
 {
-    public class SymbolTests
+    public sealed class SymbolTests
     {
         [Fact]
         public void creating_Symbol_object_for_valid_argument_value_should_be_successful()
