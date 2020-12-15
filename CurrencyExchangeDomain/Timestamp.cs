@@ -33,7 +33,7 @@ namespace CurrencyExchangeDomain
             return Now().TimestampValue - TimestampValue > period;
         }
 
-        protected bool Equals(Timestamp other)
+        public bool Equals(Timestamp other)
         {
             return TimestampValue == other.TimestampValue;
         }
