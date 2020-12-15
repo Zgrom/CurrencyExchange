@@ -23,6 +23,17 @@ namespace CurrencyExchangeOffice.Tests
             action.Should().Throw<ArgumentException>()
                 .WithMessage("amount cannot have negative value.");
         }
+
+        [Fact]
+        public void MultiplyWithRate_method_creates_new_Amount_object_with_correct_AmoutValue()
+        {
+            var rate = Rate.From(1.2);
+            var baseAmount = Amount.From(100.0);
+
+            var targetAmount = baseAmount.MultiplyWithRate(rate);
+
+            targetAmount.AmountValue.Should().Be(120.0);
+        }
         
         [Fact]
         public void Amount_objects_with_equal_AmountValues_are_equal()

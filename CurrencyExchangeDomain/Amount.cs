@@ -21,6 +21,11 @@ namespace CurrencyExchangeDomain
             return new Amount(amount);
         }
 
+        public Amount MultiplyWithRate(Rate rate)
+        {
+            return new Amount(AmountValue*rate.RateValue);
+        }
+
         private bool Equals(Amount other)
         {
             return AmountValue.Equals(other.AmountValue);
