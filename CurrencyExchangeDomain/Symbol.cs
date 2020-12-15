@@ -13,14 +13,14 @@ namespace CurrencyExchangeDomain
 
         public static Symbol From(string currencySymbol)
         {
-            if (currencySymbol == null)
+            if (string.IsNullOrWhiteSpace(currencySymbol))
             {
-                throw new ArgumentNullException($"{nameof(currencySymbol)} cannot be null.");
+                throw new ArgumentException($"{nameof(currencySymbol)} cannot be null or white space.");
             }
 
             if (currencySymbol.Length != 3)
             {
-                throw new ArgumentOutOfRangeException(
+                throw new ArgumentException(
                     $"{nameof(currencySymbol)} must have length of exactly 3.");
             }
             
