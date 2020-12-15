@@ -17,12 +17,12 @@ namespace CurrencyExchangeDomain
         {
             if (currencySymbol == null)
             {
-                throw new ArgumentNullException($"{nameof(currencySymbol)} cannot be null.");
+                throw new ArgumentException($"{nameof(currencySymbol)} cannot be null.");
             }
 
             if (currencyName == null)
             {
-                throw new ArgumentNullException($"{nameof(currencyName)} cannot be null.");
+                throw new ArgumentException($"{nameof(currencyName)} cannot be null.");
             }
             return new Currency(currencySymbol, currencyName);
         }
