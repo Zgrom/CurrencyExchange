@@ -15,7 +15,7 @@ namespace CurrencyExchangeDomain
         {
             if (timestamp < 0)
             {
-                throw new ArgumentOutOfRangeException(
+                throw new ArgumentException(
                     $"{nameof(timestamp)} cannot have negative value.");
             }
             return new Timestamp(timestamp);
