@@ -15,7 +15,7 @@ namespace CurrencyExchangeDomain
         {
             if (rate < 0.0)
             {
-                throw new ArgumentOutOfRangeException(
+                throw new ArgumentException(
                     $"{nameof(rate)} cannot have negative value.");
             }
             return new Rate(rate);
