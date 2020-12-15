@@ -15,7 +15,7 @@ namespace CurrencyExchangeDomain
         {
             if (amount < 0.0)
             {
-                throw new ArgumentOutOfRangeException(
+                throw new ArgumentException(
                 $"{nameof(amount)} cannot have negative value.");
             }
             return new Amount(amount);
