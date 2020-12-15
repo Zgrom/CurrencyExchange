@@ -2,7 +2,7 @@ using System;
 
 namespace CurrencyExchangeDomain
 {
-    public class Timestamp
+    public sealed class Timestamp
     {
         public long TimestampValue { get; }
 
