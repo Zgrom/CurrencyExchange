@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CurrencyExchangeDomain
+namespace CurrencyExchangeDomain.Tests
 {
     public sealed class CurrencyExchange
     {

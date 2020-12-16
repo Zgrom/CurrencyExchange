@@ -1,6 +1,6 @@
 using System;
 
-namespace CurrencyExchangeDomain
+namespace CurrencyExchangeDomain.Tests
 {
     public sealed class Symbol
     {

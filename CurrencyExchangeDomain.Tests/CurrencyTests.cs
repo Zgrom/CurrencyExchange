@@ -1,5 +1,5 @@
 using System;
-using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.Tests;
 using FluentAssertions;
 using Xunit;
 
