@@ -1,9 +1,9 @@
 using System;
-using CurrencyExchangeDomain.Tests;
+using CurrencyExchangeDomain;
 using FluentAssertions;
 using Xunit;
 
-namespace CurrencyExchangeDomain.Tests.Tests
+namespace CurrencyExchangeDomain.Tests
 {
     public sealed class CurrencyNameTests
     {

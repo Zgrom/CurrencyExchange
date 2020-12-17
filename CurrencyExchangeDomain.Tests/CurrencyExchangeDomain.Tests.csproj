@@ -5,7 +5,7 @@
 
         <IsPackable>false</IsPackable>
 
-        <RootNamespace>CurrencyExchangeOffice.Tests</RootNamespace>
+        <AssemblyName>CurrencyExchangeDomain</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
