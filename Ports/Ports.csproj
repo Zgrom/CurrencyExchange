@@ -10,6 +10,16 @@
 
     <ItemGroup>
       <Compile Remove="Class1.cs" />
+      <Compile Remove="RepositoryExceptions\NoDatabaseRecordForGivenCurrencyExchange.cs" />
+      <Compile Remove="RepositoryExceptions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="RepositoryExceptions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="RepositoryExceptions\**" />
     </ItemGroup>
 
 </Project>
