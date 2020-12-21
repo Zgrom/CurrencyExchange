@@ -1,25 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp5.0</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CurrencyExchangeDomain\CurrencyExchangeDomain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Class1.cs" />
-      <Compile Remove="RepositoryExceptions\NoDatabaseRecordForGivenCurrencyExchange.cs" />
-      <Compile Remove="RepositoryExceptions\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="RepositoryExceptions\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="RepositoryExceptions\**" />
     </ItemGroup>
 
 </Project>
