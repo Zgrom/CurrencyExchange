@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using ApplicationServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MongoAdapter;
+using Ports;
 
 namespace WebApi
 {
@@ -26,6 +30,14 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<HttpClient>();
+            services.AddSingleton<ICurrencyExchangeRepository>(
+                sp => new CurrencyExchangeRepository(
+                    "mongodb://localhost:27017", "CurrencyExchangeDB"));
+            services.AddSingleton<GetAllAvailableCurrenciesFromDatabaseService>();
+            services.AddSingleton<GetAllAvailableCurrenciesFromWebService>();
+            services.AddSingleton<GetAllAvailableCurrenciesService>();
+            services.AddSingleton<DatabaseInsertAllAvailableCurrenciesService>();
             services.AddControllers();
         }
 

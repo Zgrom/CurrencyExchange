@@ -1,3 +1,4 @@
+using System;
 using CurrencyExchangeDomain;
 
 namespace MongoAdapter.DTO
@@ -24,6 +25,7 @@ namespace MongoAdapter.DTO
         public static CurrencyDto ToDto(this Currency currency)
             => new CurrencyDto
             {
+                Id = Guid.NewGuid().ToString(),
                 Symbol = currency.Symbol.SymbolValue,
                 CurrencyName = currency.CurrencyName.CurrencyNameValue
             };
