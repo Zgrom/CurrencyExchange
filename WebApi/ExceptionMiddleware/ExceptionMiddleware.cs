@@ -64,7 +64,7 @@ namespace WebApi.ExceptionMiddleware
         private Task HandleFixerExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.NoContent;
+            context.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
