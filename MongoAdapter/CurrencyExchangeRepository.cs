@@ -24,13 +24,20 @@ namespace MongoAdapter
                 .GetCollection<CurrencyDto>(nameof(CurrencyDto));
         }
         
-        public async Task<CurrencyExchange> GetCurrencyExchangeRate(Currency baseCurrency, Currency targetCurrency, Amount baseCurrencyAmount)
+        public async Task<CurrencyExchange> GetCurrencyExchangeRate(
+            Currency baseCurrency, 
+            Currency targetCurrency, 
+            Amount baseCurrencyAmount)
         {
             var cursor = await _currencyExchangeCollection.FindAsync(
                 ce =>
                     ce.BaseCurrency.Symbol == baseCurrency.Symbol.SymbolValue &&
                     ce.TargetCurrency.Symbol == targetCurrency.Symbol.SymbolValue);
             var result = await cursor.FirstOrDefaultAsync();
+            if (result == null)
+            {
+                throw new Exception("No valid currency exchange rate for given currencies.");
+            }
             return result.ToDomain(baseCurrencyAmount);
         }
 

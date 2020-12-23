@@ -8,12 +8,13 @@ namespace MongoAdapter.DTO
         public static CurrencyExchangeDto ToDto(this CurrencyExchange currencyExchange)
             => new CurrencyExchangeDto
             {
-                BaseCurrency = new CurrencyDto
+                Id = Guid.NewGuid().ToString(),
+                BaseCurrency = new CurrencyInCurrencyExchangeDto
                 {
                     Symbol = currencyExchange.BaseCurrency.Symbol.SymbolValue,
                     CurrencyName = currencyExchange.BaseCurrency.CurrencyName.CurrencyNameValue
                 },
-                TargetCurrency = new CurrencyDto
+                TargetCurrency = new CurrencyInCurrencyExchangeDto
                 {
                     Symbol = currencyExchange.TargetCurrency.Symbol.SymbolValue,
                     CurrencyName = currencyExchange.TargetCurrency.CurrencyName.CurrencyNameValue

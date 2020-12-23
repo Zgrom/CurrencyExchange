@@ -38,6 +38,12 @@ namespace WebApi
             services.AddSingleton<GetAllAvailableCurrenciesFromWebService>();
             services.AddSingleton<GetAllAvailableCurrenciesService>();
             services.AddSingleton<DatabaseInsertAllAvailableCurrenciesService>();
+            services.AddSingleton<GetCurrencyService>();
+            services.AddSingleton<GetTargetCurrencyAmountService>();
+            services.AddSingleton<GetTargetCurrencyAmountFromDatabaseService>();
+            services.AddSingleton<GetTargetCurrencyExchangeFromWebService>();
+            services.AddSingleton<InsertCurrencyExchangeService>();
+            services.AddSingleton<DeleteCurrencyExchangeService>();
             services.AddControllers();
         }
 
