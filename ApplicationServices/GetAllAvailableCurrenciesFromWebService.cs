@@ -42,7 +42,7 @@ namespace ApplicationServices
             catch (Exception)
             {
                 var document = JsonConvert.DeserializeObject<FixerErrorJsonResult>(content);
-                throw new FixerErrorException(document.error.code, document.error.info);
+                throw new FixerErrorException(document.error.code, document.error.type);
             }
             
             return result;

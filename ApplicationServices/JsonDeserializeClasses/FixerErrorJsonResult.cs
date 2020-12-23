@@ -8,7 +8,7 @@ namespace ApplicationServices.JsonDeserializeClasses
         public class Error
         {
             public int code { get; set; }
-            public string info { get; set; }
+            public string type { get; set; }
         }
     }
 }

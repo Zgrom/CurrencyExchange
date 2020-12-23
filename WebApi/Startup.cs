@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MongoAdapter;
 using Ports;
+using WebApi.Extensions;
 
 namespace WebApi
 {
@@ -54,6 +55,8 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseHttpsRedirection();
 
