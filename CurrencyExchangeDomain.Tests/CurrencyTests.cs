@@ -1,5 +1,6 @@
 using System;
 using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.DomainExceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -24,7 +25,7 @@ namespace CurrencyExchangeDomain.Tests
             var currencyName = CurrencyName.From("Afghan Afghani");
             Action action = () => Currency.Of(null,currencyName);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullException>()
                 .WithMessage("currencySymbol cannot be null.");
 
         }
@@ -35,7 +36,7 @@ namespace CurrencyExchangeDomain.Tests
             var symbol = Symbol.From("AFN");
             Action action = () => Currency.Of(symbol,null);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullException>()
                 .WithMessage("currencyName cannot be null.");
 
         }

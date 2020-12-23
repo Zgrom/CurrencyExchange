@@ -1,4 +1,5 @@
 using System;
+using CurrencyExchangeDomain.DomainExceptions;
 
 namespace CurrencyExchangeDomain
 {
@@ -15,8 +16,7 @@ namespace CurrencyExchangeDomain
         {
             if (string.IsNullOrWhiteSpace(currencyName))
             {
-                throw new ArgumentException(
-                    $"{nameof(currencyName)} cannot be null or white space.");
+                throw new ArgumentCannotBeNullOrWhitespaceException(nameof(currencyName));
             }
             
             return new CurrencyName(currencyName);

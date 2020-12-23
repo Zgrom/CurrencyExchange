@@ -1,5 +1,6 @@
 using System;
 using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.DomainExceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -23,7 +24,7 @@ namespace CurrencyExchangeDomain.Tests
         {
             Action action = () => Symbol.From(input);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullOrWhitespaceException>()
                 .WithMessage("currencySymbol cannot be null or white space.");
 
         }
@@ -35,7 +36,7 @@ namespace CurrencyExchangeDomain.Tests
         {
             Action action = () => Symbol.From(input);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentMustHaveExactLengthValueException>()
                 .WithMessage("currencySymbol must have length of exactly 3.");
         }
         

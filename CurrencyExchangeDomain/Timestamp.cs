@@ -1,4 +1,5 @@
 using System;
+using CurrencyExchangeDomain.DomainExceptions;
 
 namespace CurrencyExchangeDomain
 {
@@ -15,8 +16,7 @@ namespace CurrencyExchangeDomain
         {
             if (timestamp < 0)
             {
-                throw new ArgumentException(
-                    $"{nameof(timestamp)} cannot have negative value.");
+                throw new ArgumentCannotHaveNegativeValueException(nameof(timestamp));
             }
             return new Timestamp(timestamp);
         }

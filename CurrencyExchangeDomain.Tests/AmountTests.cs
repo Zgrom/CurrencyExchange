@@ -1,5 +1,6 @@
 using System;
 using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.DomainExceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -20,12 +21,12 @@ namespace CurrencyExchangeDomain.Tests
         {
             Action action = () => Amount.From(-300.57);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotHaveNegativeValueException>()
                 .WithMessage("amount cannot have negative value.");
         }
 
         [Fact]
-        public void MultiplyWithRate_method_creates_new_Amount_object_with_correct_AmoutValue()
+        public void MultiplyWithRate_method_creates_new_Amount_object_with_correct_AmountValue()
         {
             var rate = Rate.From(1.2);
             var baseAmount = Amount.From(100.0);

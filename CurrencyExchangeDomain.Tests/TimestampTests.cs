@@ -1,5 +1,6 @@
 using System;
 using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.DomainExceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -21,7 +22,7 @@ namespace CurrencyExchangeDomain.Tests
         {
             Action action = () => Timestamp.From(-11);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotHaveNegativeValueException>()
                 .WithMessage("timestamp cannot have negative value.");
         }
 

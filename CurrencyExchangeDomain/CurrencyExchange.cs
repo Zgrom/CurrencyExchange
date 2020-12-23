@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CurrencyExchangeDomain.DomainExceptions;
 
 namespace CurrencyExchangeDomain
 {
@@ -37,23 +38,23 @@ namespace CurrencyExchangeDomain
         {
             if (baseCurrency == null)
             {
-                throw new ArgumentException($"{nameof(baseCurrency)} cannot be null.");
+                throw new ArgumentCannotBeNullException(nameof(baseCurrency));
             }
             if (targetCurrency == null)
             {
-                throw new ArgumentException($"{nameof(targetCurrency)} cannot be null.");
+                throw new ArgumentCannotBeNullException(nameof(targetCurrency));
             }
             if (timestamp == null)
             {
-                throw new ArgumentException($"{nameof(timestamp)} cannot be null.");
+                throw new ArgumentCannotBeNullException(nameof(timestamp));
             }
             if (rate == null)
             {
-                throw new ArgumentException($"{nameof(rate)} cannot be null.");
+                throw new ArgumentCannotBeNullException(nameof(rate));
             }
             if (baseCurrencyAmount == null)
             {
-                throw new ArgumentException($"{nameof(baseCurrencyAmount)} cannot be null.");
+                throw new ArgumentCannotBeNullException(nameof(baseCurrencyAmount));
             }
             
             var targetCurrencyAmount = baseCurrencyAmount.MultiplyWithRate(rate);

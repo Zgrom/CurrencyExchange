@@ -1,5 +1,6 @@
 using System;
 using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.DomainExceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -23,7 +24,7 @@ namespace CurrencyExchangeDomain.Tests
         {
             Action action = () => CurrencyName.From(input);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullOrWhitespaceException>()
                 .WithMessage("currencyName cannot be null or white space.");
 
         }

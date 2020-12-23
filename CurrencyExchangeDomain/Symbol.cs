@@ -1,4 +1,5 @@
 using System;
+using CurrencyExchangeDomain.DomainExceptions;
 
 namespace CurrencyExchangeDomain
 {
@@ -15,13 +16,12 @@ namespace CurrencyExchangeDomain
         {
             if (string.IsNullOrWhiteSpace(currencySymbol))
             {
-                throw new ArgumentException($"{nameof(currencySymbol)} cannot be null or white space.");
+                throw new ArgumentCannotBeNullOrWhitespaceException(nameof(currencySymbol));
             }
 
             if (currencySymbol.Length != 3)
             {
-                throw new ArgumentException(
-                    $"{nameof(currencySymbol)} must have length of exactly 3.");
+                throw new ArgumentMustHaveExactLengthValueException(nameof(currencySymbol));
             }
             
             return new Symbol(currencySymbol);

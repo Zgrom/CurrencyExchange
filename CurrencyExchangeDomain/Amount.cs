@@ -1,4 +1,5 @@
 using System;
+using CurrencyExchangeDomain.DomainExceptions;
 
 namespace CurrencyExchangeDomain
 {
@@ -15,8 +16,7 @@ namespace CurrencyExchangeDomain
         {
             if (amount < 0.0)
             {
-                throw new ArgumentException(
-                $"{nameof(amount)} cannot have negative value.");
+                throw new ArgumentCannotHaveNegativeValueException(nameof(amount));
             }
             return new Amount(amount);
         }

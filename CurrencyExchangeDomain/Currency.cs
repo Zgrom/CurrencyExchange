@@ -1,4 +1,5 @@
 using System;
+using CurrencyExchangeDomain.DomainExceptions;
 
 namespace CurrencyExchangeDomain
 {
@@ -17,12 +18,12 @@ namespace CurrencyExchangeDomain
         {
             if (currencySymbol == null)
             {
-                throw new ArgumentException($"{nameof(currencySymbol)} cannot be null.");
+                throw new ArgumentCannotBeNullException(nameof(currencySymbol));
             }
 
             if (currencyName == null)
             {
-                throw new ArgumentException($"{nameof(currencyName)} cannot be null.");
+                throw new ArgumentCannotBeNullException(nameof(currencyName));
             }
             return new Currency(currencySymbol, currencyName);
         }

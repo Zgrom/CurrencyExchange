@@ -1,5 +1,6 @@
 using System;
 using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.DomainExceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace CurrencyExchangeDomain.Tests
         {
             Action action = () => Rate.From(-3.57);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotHaveNegativeValueException>()
                 .WithMessage("rate cannot have negative value.");
         }
         

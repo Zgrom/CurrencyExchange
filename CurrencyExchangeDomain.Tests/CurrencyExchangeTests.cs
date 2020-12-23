@@ -1,5 +1,6 @@
 using System;
 using CurrencyExchangeDomain;
+using CurrencyExchangeDomain.DomainExceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -48,7 +49,7 @@ namespace CurrencyExchangeDomain.Tests
                 _rate,
                 _baseAmount);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullException>()
                 .WithMessage("baseCurrency cannot be null.");
         }
         
@@ -62,7 +63,7 @@ namespace CurrencyExchangeDomain.Tests
                 _rate,
                 _baseAmount);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullException>()
                 .WithMessage("targetCurrency cannot be null.");
         }
         
@@ -76,7 +77,7 @@ namespace CurrencyExchangeDomain.Tests
                 _rate,
                 _baseAmount);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullException>()
                 .WithMessage("timestamp cannot be null.");
         }
         
@@ -90,7 +91,7 @@ namespace CurrencyExchangeDomain.Tests
                 null,
                 _baseAmount);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullException>()
                 .WithMessage("rate cannot be null.");
         }
         
@@ -104,7 +105,7 @@ namespace CurrencyExchangeDomain.Tests
                 _rate,
                 null);
 
-            action.Should().Throw<ArgumentException>()
+            action.Should().Throw<ArgumentCannotBeNullException>()
                 .WithMessage("baseCurrencyAmount cannot be null.");
         }
         
