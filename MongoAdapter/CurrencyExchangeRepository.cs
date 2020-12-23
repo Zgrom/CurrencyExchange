@@ -6,6 +6,7 @@ using CurrencyExchangeDomain;
 using MongoAdapter.DTO;
 using MongoDB.Driver;
 using Ports;
+using Ports.RepositoryExceptions;
 
 namespace MongoAdapter
 {
@@ -36,7 +37,7 @@ namespace MongoAdapter
             var result = await cursor.FirstOrDefaultAsync();
             if (result == null)
             {
-                throw new Exception("No valid currency exchange rate for given currencies.");
+                throw new NoValidCurrencyExchangeRateException();
             }
             return result.ToDomain(baseCurrencyAmount);
         }

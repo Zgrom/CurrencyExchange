@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using CurrencyExchangeDomain;
+using Ports.RepositoryExceptions;
 
 namespace ApplicationServices
 {
@@ -32,7 +33,7 @@ namespace ApplicationServices
                     await _getTargetCurrencyAmountFromDatabaseService
                         .GetAmount(baseCurrency, targetCurrency, baseCurrencyAmount);
             }
-            catch (Exception)
+            catch (NoValidCurrencyExchangeRateException)
             {
                 var currencyExchange = 
                     await _getTargetCurrencyExchangeFromWebService

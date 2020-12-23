@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using CurrencyExchangeDomain;
 using Ports;
+using Ports.RepositoryExceptions;
 
 namespace ApplicationServices
 {
@@ -28,7 +29,7 @@ namespace ApplicationServices
             if (currencyExchange.IsDataTooOld())
             {
                 await _deleteCurrencyExchangeService.Delete(currencyExchange);
-                throw new Exception("No valid currency exchange rate for given currencies.");
+                throw new NoValidCurrencyExchangeRateException();
             }
             
             return currencyExchange.TargetCurrencyAmount.AmountValue;

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using CurrencyExchangeDomain;
+using Ports.RepositoryExceptions;
 
 namespace ApplicationServices
 {
@@ -21,7 +22,7 @@ namespace ApplicationServices
             {
                 return currency;
             }
-            throw new ArgumentException($"Currency with symbol {currencySymbol} is not available");
+            throw new CurrencySymbolNotAvailableException(currencySymbol);
         }
     }
 }
