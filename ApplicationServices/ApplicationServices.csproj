@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <Compile Remove="AllAvailableCurrenciesToDtoService.cs" />
+      <Compile Remove="HandleFixerErrorService.cs" />
     </ItemGroup>
 
 </Project>

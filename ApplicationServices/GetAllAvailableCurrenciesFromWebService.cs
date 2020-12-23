@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CurrencyExchangeDomain;
 using Newtonsoft.Json;
+using ApplicationServices.ApplicationServicesExceptions;
+using ApplicationServices.JsonDeserializeClasses;
 
 namespace ApplicationServices
 {
@@ -25,9 +28,9 @@ namespace ApplicationServices
         {
             var result = new List<Currency>();
             var content = await (await GetContentFromUri(Uri)).Content.ReadAsStringAsync();
-            var document = JsonConvert.DeserializeObject<AllAvailableCurrenciesResult>(content);
-            if (document.success)
+            try
             {
+                var document = JsonConvert.DeserializeObject<AllAvailableCurrenciesResult>(content);
                 foreach (var documentSymbol in document.symbols)
                 {
                     result.Add(
@@ -36,13 +39,14 @@ namespace ApplicationServices
                             CurrencyName.From(documentSymbol.Value) ));
                 }
             }
+            catch (Exception)
+            {
+                var document = JsonConvert.DeserializeObject<FixerErrorJsonResult>(content);
+                throw new FixerErrorException(document.error.code, document.error.info);
+            }
+            
             return result;
         }
         
-        private class AllAvailableCurrenciesResult
-        {
-            public bool success { get; set; }
-            public Dictionary<string,string> symbols { get; set; }
-        }
     }
 }

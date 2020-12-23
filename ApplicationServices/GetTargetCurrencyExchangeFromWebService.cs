@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ApplicationServices.ApplicationServicesExceptions;
+using ApplicationServices.JsonDeserializeClasses;
 using CurrencyExchangeDomain;
 using Newtonsoft.Json;
 
@@ -29,9 +31,9 @@ namespace ApplicationServices
         {
             var currenciesUri = $"{Uri}&base={baseCurrency.Symbol.SymbolValue}&symbols={targetCurrency.Symbol.SymbolValue}";
             var content = await (await GetContentFromUri(currenciesUri)).Content.ReadAsStringAsync();
-            var document = JsonConvert.DeserializeObject<CurrencyExchangeRateLoaded>(content);
-            if (document.success)
+            try
             {
+                var document = JsonConvert.DeserializeObject<CurrencyExchangeRateLoaded>(content);
                 return CurrencyExchange.Of(
                     baseCurrency,
                     targetCurrency,
@@ -39,19 +41,12 @@ namespace ApplicationServices
                     Rate.From(document.rates[targetCurrency.Symbol.SymbolValue]),
                     baseCurrencyAmount);
             }
-            else
+            catch (Exception)
             {
-                throw new Exception("Some fixer.io error");
+                var document = JsonConvert.DeserializeObject<FixerErrorJsonResult>(content);
+                throw new FixerErrorException(document.error.code, document.error.info);
             }
         }
-        
-        private class CurrencyExchangeRateLoaded
-        {
-            public bool success { get; set; }
-            public long timestamp { get; set; }
-            public string baseCurrency { get; set; }
-            public DateTime date { get; set; }
-            public Dictionary<string,double> rates { get; set; }
-        }
+       
     }
 }
