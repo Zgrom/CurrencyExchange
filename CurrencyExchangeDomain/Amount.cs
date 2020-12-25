@@ -23,7 +23,7 @@ namespace CurrencyExchangeDomain
 
         public Amount MultiplyWithRate(Rate rate)
         {
-            return new Amount(AmountValue*rate.RateValue);
+            return new Amount(Math.Round(AmountValue*rate.RateValue,2));
         }
 
         private bool Equals(Amount other)

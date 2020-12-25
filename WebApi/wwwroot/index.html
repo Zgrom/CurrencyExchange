@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Exchange</title>
+    <script src="javaScript/scripts.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body onload="getAllAvailableCurrencies()">
+<p id="title">Fixer.io currency exchange rate (only EUR -> ALL)</p>
+<select id="baseCurrency" name="baseCurrency"></select>
+<input type="text" id="baseCurrencyAmount" name="baseCurrencyAmount" value="0.0">
+<select id="targetCurrency" name="targetCurrency"></select>
+<input type="number" id="targetCurrencyAmount" name="targetCurrencyAmount" readonly>
+<input type="button" id="currencyExchange" onclick="getTargetCurrencyAmount()" value="Get exchanged value">
+<p id="errorMessage"></p>
+
+</body>
+</html>

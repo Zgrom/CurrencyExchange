@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ApplicationServices;
 using CurrencyExchangeDomain;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -40,7 +41,7 @@ namespace WebApi.Controllers
             return Ok(domainCurrencies.Select(dc =>dc.ToDtoWebApi()).ToList());
         }
 
-        [HttpGet("latest/")]
+        [HttpPost("latest/")]
         public async Task<IActionResult> GetCurrencyExchange([FromBody]CurrencyExchangeDto currencyExchangeDto)
         {
             var domainBaseCurrency = 
