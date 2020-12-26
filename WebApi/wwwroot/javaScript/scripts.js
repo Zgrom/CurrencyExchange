@@ -28,7 +28,8 @@ async function getAllAvailableCurrencies() {
 }
 
 async function getTargetCurrencyAmount(){
-    document.getElementById('errorMessage').innerHTML = '';
+    document.getElementById('errorMessage').innerHTML = ''
+    document.getElementById('targetCurrencyAmount').value = '';
     const url='http://localhost:5000/CurrencyExchange/latest';
     
     let baseCurrencySelect = document.getElementById('baseCurrency');
@@ -48,11 +49,16 @@ async function getTargetCurrencyAmount(){
     })
         .then(response => {
             if(!response.ok) {
-                throw new Error(response.status + ' - ' +response.statusText)
+                response.json().then(
+                    err => document.getElementById('errorMessage').innerHTML =
+                        response.status+
+                        ' - '+
+                        response.statusText+
+                        ' : '+
+                        err.Message
+                );
             } else {
                 response.json().then(r => targetCurrencyInput.value = r);
             }
         })
-        .catch(error => document.getElementById('errorMessage').innerHTML =
-            error.message);
 }
