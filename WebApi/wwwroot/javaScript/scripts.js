@@ -62,3 +62,11 @@ async function getTargetCurrencyAmount(){
             }
         })
 }
+
+function validateBaseCurrencyAmountInput(){
+    let el = document.getElementById('baseCurrencyAmount')
+    if (el.value < 0) {
+        alert('Amount cannot have negative value');
+        el.value = 0;
+    }
+}

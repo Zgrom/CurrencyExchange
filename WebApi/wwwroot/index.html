@@ -9,10 +9,17 @@
 <body onload="getAllAvailableCurrencies()">
 <p id="title">Fixer.io currency exchange rate (only EUR -> ALL)</p>
 <select id="baseCurrency" name="baseCurrency"></select>
-<input type="text" id="baseCurrencyAmount" name="baseCurrencyAmount" value="0.0">
+<input type="number" 
+       id="baseCurrencyAmount" 
+       name="baseCurrencyAmount" 
+       value="0" min="0" 
+       onchange="validateBaseCurrencyAmountInput()">
 <select id="targetCurrency" name="targetCurrency"></select>
 <input type="number" id="targetCurrencyAmount" name="targetCurrencyAmount" readonly>
-<input type="button" id="currencyExchange" onclick="getTargetCurrencyAmount()" value="Get exchanged value">
+<input type="button" 
+       id="currencyExchange" 
+       onclick="getTargetCurrencyAmount()" 
+       value="Get exchanged value">
 <p id="errorMessage"></p>
 
 </body>
