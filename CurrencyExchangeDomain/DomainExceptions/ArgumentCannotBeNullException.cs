@@ -1,5 +1,3 @@
-using System;
-
 namespace CurrencyExchangeDomain.DomainExceptions
 {
     public sealed class ArgumentCannotBeNullException : DomainException

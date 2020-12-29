@@ -1,4 +1,3 @@
-using System;
 using CurrencyExchangeDomain.DomainExceptions;
 
 namespace CurrencyExchangeDomain
