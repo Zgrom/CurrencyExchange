@@ -5,8 +5,8 @@ namespace MongoAdapter.DTO
     public sealed class CurrencyExchangeDto
     {
         public string Id { get; set; }
-        public CurrencyInCurrencyExchangeDto BaseCurrency { get; set; }
-        public CurrencyInCurrencyExchangeDto TargetCurrency { get; set; }
+        public CurrencyAsPropertyDto BaseCurrency { get; set; }
+        public CurrencyAsPropertyDto TargetCurrency { get; set; }
         public long Timestamp { get; set; }
         public double Rate { get; set; }
 

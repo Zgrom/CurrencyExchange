@@ -2,7 +2,7 @@ using CurrencyExchangeDomain;
 
 namespace MongoAdapter.DTO
 {
-    public sealed class CurrencyInCurrencyExchangeDto
+    public sealed class CurrencyAsPropertyDto
     {
         public string Symbol { get; set; }
         public string CurrencyName { get; set; }
