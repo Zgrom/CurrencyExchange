@@ -70,6 +70,22 @@ namespace CurrencyExchangeDomain.Tests
         }
 
         [Fact]
+        public void if_timestamp_is_too_old_then_method_IsTooOld_should_return_true()
+        {
+            var latestRates = LatestRates.Of(_timestamp, _rates);
+
+            latestRates.Timestamp.IsTooOld().Should().BeTrue();
+        }
+
+        [Fact]
+        public void if_timestamp_is_not_too_old_then_method_IsTooOld_should_return_false()
+        {
+            var latestRates = LatestRates.Of(Timestamp.From(DateTimeOffset.Now.ToUnixTimeSeconds()), _rates);
+
+            latestRates.Timestamp.IsTooOld().Should().BeFalse();
+        }
+
+        [Fact]
         public void LatestRates_objects_with_equal_Timestamp_values_are_equal()
         {
             var latestRates1 = LatestRates.Of(_timestamp,_rates);
