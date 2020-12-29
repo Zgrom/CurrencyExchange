@@ -26,7 +26,8 @@ namespace WebApi
             services.AddTransient<HttpClient>();
             services.AddSingleton<ICurrencyExchangeRepository>(
                 sp => new CurrencyExchangeRepository(
-                    "mongodb://localhost:27017", "CurrencyExchangeDB"));
+                    Configuration.GetValue<string>("Database:Connection.String"),
+                    Configuration.GetValue<string>("Database:Database.Name")));
             services.AddSingleton<GetAllAvailableCurrenciesFromDatabaseService>();
             services.AddSingleton<GetAllAvailableCurrenciesFromWebService>();
             services.AddSingleton<GetAllAvailableCurrenciesService>();
