@@ -14,6 +14,7 @@ namespace MongoAdapter
     {
         private readonly IMongoCollection<CurrencyExchangeDto> _currencyExchangeCollection;
         private readonly IMongoCollection<CurrencyDto> _availableCurrenciesCollection;
+        private readonly IMongoCollection<LatestRatesDto> _latestRatesCollection;
         
         public CurrencyExchangeRepository(string connectionUri, string databaseName)
         {
@@ -21,6 +22,8 @@ namespace MongoAdapter
             var database = mongoClient.GetDatabase(databaseName);
             _currencyExchangeCollection = database
                 .GetCollection<CurrencyExchangeDto>(nameof(CurrencyExchangeDto));
+            _latestRatesCollection = database
+                .GetCollection<LatestRatesDto>(nameof(LatestRatesDto));
             _availableCurrenciesCollection = database
                 .GetCollection<CurrencyDto>(nameof(CurrencyDto));
         }
@@ -52,6 +55,26 @@ namespace MongoAdapter
                     ce.BaseCurrency.Symbol == currencyExchange.BaseCurrency.Symbol.SymbolValue &&
                     ce.TargetCurrency.Symbol == currencyExchange.TargetCurrency.Symbol.SymbolValue);
 
+        public async Task<LatestRates> GetLatestRates()
+        {
+            var cursor = await _latestRatesCollection.FindAsync(
+                lr => true);
+            var result = await cursor.FirstOrDefaultAsync();
+            if (result == null)
+            {
+                throw new NoValidCurrencyExchangeRateException();
+            }
+
+            return result.ToDomain();
+        }
+
+        public async Task InsertLatestRates(LatestRates latestRates)
+            => await _latestRatesCollection.InsertOneAsync(latestRates.ToDto());
+
+        public async Task DeleteLatestRates(LatestRates latestRates)
+            => await _latestRatesCollection.DeleteOneAsync(
+                lr => lr.Timestamp == latestRates.Timestamp.TimestampValue);
+        
         public async Task<List<Currency>> GetAllAvailableCurrencies()
         {
             var cursor = await _availableCurrenciesCollection.FindAsync(_ => true);
