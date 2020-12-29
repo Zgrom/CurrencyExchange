@@ -24,13 +24,19 @@ namespace ApplicationServices
             Currency targetCurrency,
             Amount baseCurrencyAmount)
         {
-            var currencyExchange = await _currencyExchangeRepository
-                .GetCurrencyExchangeRate(baseCurrency, targetCurrency, baseCurrencyAmount);
-            if (currencyExchange.IsDataTooOld())
+            var latestRates = await _currencyExchangeRepository.GetLatestRates();
+            if (latestRates.IsTooOld())
             {
-                await _deleteCurrencyExchangeService.Delete(currencyExchange);
+                await _currencyExchangeRepository.DeleteLatestRates(latestRates);
                 throw new NoValidCurrencyExchangeRateException();
             }
+
+            var currencyExchange = CurrencyExchange.Of(
+                baseCurrency,
+                targetCurrency,
+                latestRates.Timestamp,
+                latestRates.GetRateFor(baseCurrency, targetCurrency),
+                baseCurrencyAmount);
             
             return currencyExchange.TargetCurrencyAmount.AmountValue;
         }
