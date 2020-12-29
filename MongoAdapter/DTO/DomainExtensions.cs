@@ -26,6 +26,7 @@ namespace MongoAdapter.DTO
 
         public static LatestRatesDto ToDto(this LatestRates latestRates)
         {
+            var id = Guid.NewGuid().ToString();
             var timestamp = latestRates.Timestamp.TimestampValue;
             var rates = new Dictionary<CurrencyAsPropertyDto,double>();
             foreach (var rate in latestRates.Rates)
@@ -43,6 +44,7 @@ namespace MongoAdapter.DTO
             }
             return new LatestRatesDto
             {
+                Id = id,
                 Timestamp = timestamp,
                 Rates = rates
             };

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using CurrencyExchangeDomain;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
 
 namespace MongoAdapter.DTO
 {
@@ -8,6 +10,7 @@ namespace MongoAdapter.DTO
     {
         public string Id { get; set; }
         public long Timestamp { get; set; }
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<CurrencyAsPropertyDto, double> Rates { get; set; }
 
         public LatestRates ToDomain()
