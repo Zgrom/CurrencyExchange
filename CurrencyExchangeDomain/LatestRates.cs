@@ -43,11 +43,6 @@ namespace CurrencyExchangeDomain
             var baseCurrencyRate = Rates[baseCurrency];
             var targetCurrencyRate = Rates[targetCurrency];
 
-            if (targetCurrencyRate.RateValue <= 0.0)
-            {
-                throw new BadRateDataException(nameof(targetCurrency.Symbol));
-            }
-            
             return Rate.From(targetCurrencyRate.RateValue/baseCurrencyRate.RateValue);
         }
 

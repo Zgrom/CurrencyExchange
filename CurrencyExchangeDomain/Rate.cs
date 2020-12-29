@@ -14,7 +14,7 @@ namespace CurrencyExchangeDomain
 
         public static Rate From(double rate)
         {
-            if (rate < 0.0)
+            if (rate <= 0.0)
             {
                 throw new ArgumentCannotHaveNegativeValueException(nameof(rate));
             }
