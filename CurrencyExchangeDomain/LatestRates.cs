@@ -50,5 +50,20 @@ namespace CurrencyExchangeDomain
             
             return Rate.From(targetCurrencyRate.RateValue/baseCurrencyRate.RateValue);
         }
+
+        private bool Equals(LatestRates other)
+        {
+            return Equals(Timestamp, other.Timestamp);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return ReferenceEquals(this, obj) || obj is LatestRates other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Timestamp != null ? Timestamp.GetHashCode() : 0);
+        }
     }
 }
