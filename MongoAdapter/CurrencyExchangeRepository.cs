@@ -27,34 +27,6 @@ namespace MongoAdapter
             _availableCurrenciesCollection = database
                 .GetCollection<CurrencyDto>(nameof(CurrencyDto));
         }
-        
-        public async Task<CurrencyExchange> GetCurrencyExchangeRate(
-            Currency baseCurrency, 
-            Currency targetCurrency, 
-            Amount baseCurrencyAmount)
-        {
-            var cursor = await _currencyExchangeCollection.FindAsync(
-                ce =>
-                    ce.BaseCurrency.Symbol == baseCurrency.Symbol.SymbolValue &&
-                    ce.TargetCurrency.Symbol == targetCurrency.Symbol.SymbolValue);
-            var result = await cursor.FirstOrDefaultAsync();
-            if (result == null)
-            {
-                throw new NoValidCurrencyExchangeRateException();
-            }
-            return result.ToDomain(baseCurrencyAmount);
-        }
-
-        public async Task InsertCurrencyExchange(CurrencyExchange currencyExchange)
-            => await _currencyExchangeCollection.InsertOneAsync(currencyExchange.ToDto());
-
-
-        public async Task DeleteCurrencyExchange(CurrencyExchange currencyExchange)
-            => await _currencyExchangeCollection.DeleteOneAsync(
-                ce =>
-                    ce.BaseCurrency.Symbol == currencyExchange.BaseCurrency.Symbol.SymbolValue &&
-                    ce.TargetCurrency.Symbol == currencyExchange.TargetCurrency.Symbol.SymbolValue);
-
         public async Task<LatestRates> GetLatestRates()
         {
             var cursor = await _latestRatesCollection.FindAsync(
