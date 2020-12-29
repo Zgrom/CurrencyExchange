@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using ApplicationServices;
 using CurrencyExchangeDomain;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using MongoAdapter.DTO;
-using MongoDB.Bson;
 using WebApi.Dto;
 using CurrencyExchangeDto = WebApi.Dto.CurrencyExchangeDto;
 
