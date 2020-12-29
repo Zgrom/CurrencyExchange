@@ -42,9 +42,6 @@ namespace WebApi
             services.AddSingleton<GetCurrencyService>();
             services.AddSingleton<GetTargetCurrencyAmountService>();
             services.AddSingleton<GetTargetCurrencyAmountFromDatabaseService>();
-            services.AddSingleton<GetTargetCurrencyExchangeFromWebService>();
-            services.AddSingleton<InsertCurrencyExchangeService>();
-            services.AddSingleton<DeleteCurrencyExchangeService>();
             services.AddSingleton<GetLatestRatesFromWebService>();
             services.AddSingleton<InsertLatestRatesService>();
             services.AddControllers();

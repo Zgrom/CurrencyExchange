@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -6,7 +5,6 @@ using System.Threading.Tasks;
 using ApplicationServices.ApplicationServicesExceptions;
 using ApplicationServices.JsonDeserializeClasses;
 using CurrencyExchangeDomain;
-using CurrencyExchangeDomain.DomainExceptions;
 using MongoAdapter.DTO;
 using Newtonsoft.Json;
 using JsonException = System.Text.Json.JsonException;

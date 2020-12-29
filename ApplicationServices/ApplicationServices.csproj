@@ -17,6 +17,9 @@
     <ItemGroup>
       <Compile Remove="AllAvailableCurrenciesToDtoService.cs" />
       <Compile Remove="HandleFixerErrorService.cs" />
+      <Compile Remove="GetTargetCurrencyExchangeFromWebService.cs" />
+      <Compile Remove="InsertCurrencyExchangeService.cs" />
+      <Compile Remove="DeleteCurrencyExchangeService.cs" />
     </ItemGroup>
 
 </Project>
