@@ -13,6 +13,8 @@ namespace Ports
             Amount baseCurrencyAmount);
         Task InsertCurrencyExchange(CurrencyExchange currencyExchange);
         Task DeleteCurrencyExchange(CurrencyExchange currencyExchange);
+        Task InsertLatestRates(LatestRates latestRates);
+        Task DeleteLatestRates(LatestRates latestRates);
         Task<List<Currency>> GetAllAvailableCurrencies();
         Task InsertAllAvailableCurrencies(List<Currency> allAvailableCurrencies);
     }
