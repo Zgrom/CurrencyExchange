@@ -6,17 +6,21 @@ using CurrencyExchangeDomain;
 using Newtonsoft.Json;
 using ApplicationServices.ApplicationServicesExceptions;
 using ApplicationServices.JsonDeserializeClasses;
+using Microsoft.Extensions.Configuration;
 
 namespace ApplicationServices
 {
     public sealed class GetAllAvailableCurrenciesFromWebService
     {
+        private readonly IConfiguration _configuration; 
         private readonly HttpClient _client;
-        private const string Uri = "http://data.fixer.io/api/symbols?access_key=ecd46d5e28c44d88658a7b109cc29b2a";
 
-        public GetAllAvailableCurrenciesFromWebService(HttpClient httpClient)
+        public GetAllAvailableCurrenciesFromWebService(
+            HttpClient httpClient,
+            IConfiguration configuration)
         {
             _client = httpClient;
+            _configuration = configuration;
         }
 
         private async Task<HttpResponseMessage> GetContentFromUri(string uri)
@@ -27,7 +31,9 @@ namespace ApplicationServices
         public async Task<List<Currency>> GetAll()
         {
             var result = new List<Currency>();
-            var content = await (await GetContentFromUri(Uri)).Content.ReadAsStringAsync();
+            var content = 
+                await (await GetContentFromUri(_configuration["Fixer.Io.Uris:Symbols"]))
+                    .Content.ReadAsStringAsync();
             try
             {
                 var document = JsonConvert.DeserializeObject<AllAvailableCurrenciesResult>(content);
