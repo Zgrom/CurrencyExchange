@@ -1,5 +1,6 @@
 using System.Net.Http;
 using ApplicationServices;
+using FixerAdapter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,10 @@ namespace WebApi
                 sp => new CurrencyExchangeRepository(
                     Configuration.GetValue<string>("Database:Connection.String"),
                     Configuration.GetValue<string>("Database:Database.Name")));
+            services.AddSingleton<ICurrencyExchangeWebServicePort>(
+                sp => new CurrencyExchangeWebServiceAdapter(
+                    Configuration.GetValue<string>("Fixer.Io.Uris:Symbols"),
+                    Configuration.GetValue<string>("Fixer.Io.Uris:Latest")));
             services.AddSingleton<GetAllAvailableCurrenciesFromDatabaseService>();
             services.AddSingleton<GetAllAvailableCurrenciesFromWebService>();
             services.AddSingleton<GetAllAvailableCurrenciesService>();

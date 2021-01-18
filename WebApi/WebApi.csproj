@@ -14,6 +14,7 @@
     <ItemGroup>
       <ProjectReference Include="..\ApplicationServices\ApplicationServices.csproj" />
       <ProjectReference Include="..\CurrencyExchangeDomain\CurrencyExchangeDomain.csproj" />
+      <ProjectReference Include="..\FixerAdapter\FixerAdapter.csproj" />
       <ProjectReference Include="..\MongoAdapter\MongoAdapter.csproj" />
       <ProjectReference Include="..\Ports\Ports.csproj" />
     </ItemGroup>
