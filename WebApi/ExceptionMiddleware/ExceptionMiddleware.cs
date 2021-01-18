@@ -24,25 +24,21 @@ namespace WebApi.ExceptionMiddleware
             }
             catch (DomainException ex)
             {
-                await HandleDomainExceptionAsync(httpContext, ex);
+                await HandleExceptionAsync(httpContext, ex, (int)HttpStatusCode.BadRequest);
             }
             catch (CurrencySymbolNotAvailableException ex)
             {
-                await HandleRepositoryExceptionAsync(httpContext, ex);
-            }
-            catch (FixerErrorException ex)
-            {
-                await HandleFixerExceptionAsync(httpContext, ex);
+                await HandleExceptionAsync(httpContext, ex, (int)HttpStatusCode.NotFound);
             }
             catch (Exception ex)
             {
-                await HandleUnexpectedExceptionAsync(httpContext, ex);
+                await HandleExceptionAsync(httpContext, ex, (int)HttpStatusCode.InternalServerError);
             }
         }
-        private Task HandleDomainExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(HttpContext context, Exception exception, int statusCode)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.StatusCode = statusCode;
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
@@ -50,37 +46,5 @@ namespace WebApi.ExceptionMiddleware
             }.ToString());
         }
         
-        private Task HandleRepositoryExceptionAsync(HttpContext context, Exception exception)
-        {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            return context.Response.WriteAsync(new ErrorDetails()
-            {
-                StatusCode = context.Response.StatusCode,
-                Message = exception.Message
-            }.ToString());
-        }
-        
-        private Task HandleFixerExceptionAsync(HttpContext context, Exception exception)
-        {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
-            return context.Response.WriteAsync(new ErrorDetails()
-            {
-                StatusCode = context.Response.StatusCode,
-                Message = exception.Message
-            }.ToString());
-        }
-        
-        private Task HandleUnexpectedExceptionAsync(HttpContext context, Exception exception)
-        {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            return context.Response.WriteAsync(new ErrorDetails()
-            {
-                StatusCode = context.Response.StatusCode,
-                Message = exception.Message
-            }.ToString());
-        }
     }
 }
