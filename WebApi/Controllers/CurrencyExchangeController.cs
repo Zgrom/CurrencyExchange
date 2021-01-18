@@ -32,7 +32,7 @@ namespace WebApi.Controllers
             return Ok(domainCurrencies.Select(dc =>dc.ToDtoWebApi()).ToList());
         }
 
-        [HttpPost("latest/")]
+        [HttpPost("convert/")]
         public async Task<IActionResult> GetCurrencyExchange([FromBody]CurrencyExchangeDto currencyExchangeDto)
         {
             var domainBaseCurrency = 
