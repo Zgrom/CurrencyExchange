@@ -6,15 +6,15 @@ namespace CurrencyExchangeDomain
     public sealed class LatestRates
     {
         public Timestamp Timestamp { get; }
-        public Dictionary<Currency,Rate> Rates { get; }
+        public Dictionary<Symbol,Rate> Rates { get; }
 
-        private LatestRates(Timestamp timestamp, Dictionary<Currency, Rate> rates)
+        private LatestRates(Timestamp timestamp, Dictionary<Symbol, Rate> rates)
         {
             Timestamp = timestamp;
             Rates = rates;
         }
 
-        public static LatestRates Of(Timestamp timestamp, Dictionary<Currency, Rate> rates)
+        public static LatestRates Of(Timestamp timestamp, Dictionary<Symbol, Rate> rates)
         {
             if (timestamp == null)
             {
@@ -28,7 +28,7 @@ namespace CurrencyExchangeDomain
             return new LatestRates(timestamp, rates);
         }
 
-        public Rate GetRateFor(Currency baseCurrency, Currency targetCurrency)
+        public Rate GetRateFor(Symbol baseCurrency, Symbol targetCurrency)
         {
             if (baseCurrency == null)
             {

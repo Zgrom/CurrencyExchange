@@ -14,14 +14,5 @@ namespace ApplicationServices
             _getAllAvailableCurrenciesService = getAllAvailableCurrenciesService;
         }
 
-        public async Task<Currency> GetBySymbol(string currencySymbol)
-        {
-            var allAvailableCurrencies = await _getAllAvailableCurrenciesService.GetAll();
-            foreach (var currency in allAvailableCurrencies.Where(currency => currency.Symbol.SymbolValue == currencySymbol))
-            {
-                return currency;
-            }
-            throw new CurrencySymbolNotAvailableException(currencySymbol);
-        }
     }
 }

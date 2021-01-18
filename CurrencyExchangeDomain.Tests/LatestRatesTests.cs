@@ -9,14 +9,10 @@ namespace CurrencyExchangeDomain.Tests
     public sealed class LatestRatesTests
     {
         private readonly Timestamp _timestamp = Timestamp.From(123123);
-        private readonly Dictionary<Currency,Rate> _rates = new Dictionary<Currency, Rate>()
+        private readonly Dictionary<Symbol,Rate> _rates = new Dictionary<Symbol, Rate>()
         {
-            {Currency.Of(
-                Symbol.From("AFN"),
-                CurrencyName.From("Afghan Afghani")), Rate.From(120.0)},
-            {Currency.Of(
-                Symbol.From("AED"),
-                CurrencyName.From("United Arab Emirates Dirham")), Rate.From(12.0)}
+            {Symbol.From("AFN"), Rate.From(120.0)},
+            {Symbol.From("AED"), Rate.From(12.0)}
         };
 
         [Fact]
@@ -26,7 +22,7 @@ namespace CurrencyExchangeDomain.Tests
 
             latestRates.Timestamp.TimestampValue.Should().Be(123123);
             latestRates
-                .Rates[Currency.Of(Symbol.From("AFN"), CurrencyName.From("Afghan Afghani"))]
+                .Rates[Symbol.From("AFN")]
                 .RateValue
                 .Should().Be(120.0);
             latestRates.Rates.Count.Should().Be(2);
@@ -54,12 +50,8 @@ namespace CurrencyExchangeDomain.Tests
         public void GetRateFor_method_should_return_accurate_value()
         {
             var latestRates = LatestRates.Of(_timestamp, _rates);
-            var currencyAfghani = Currency.Of(
-                Symbol.From("AFN"),
-                CurrencyName.From("Afghan Afghani"));
-            var currencyDirham = Currency.Of(
-                Symbol.From("AED"),
-                CurrencyName.From("United Arab Emirates Dirham"));
+            var currencyAfghani = Symbol.From("AFN");
+            var currencyDirham = Symbol.From("AED");
 
             latestRates.GetRateFor(currencyAfghani,currencyDirham)
                 .RateValue.Should().Be(0.1);

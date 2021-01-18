@@ -42,18 +42,12 @@ namespace ApplicationServices
             {
                 var document = JsonConvert.DeserializeObject<LatestRatesLoaded>(content);
                 var allAvailableCurrencies = await _getAllAvailableCurrenciesService.GetAll();
-                var rates = new Dictionary<CurrencyAsPropertyDto, double>();
+                var rates = new Dictionary<string, double>();
                 foreach (var documentRate in document.rates)
                 {
-                    var currencyAsProperty = new CurrencyAsPropertyDto
-                    {
-                        CurrencyName = allAvailableCurrencies
-                            .First(curr => curr.Symbol.SymbolValue == documentRate.Key)
-                            .CurrencyName.CurrencyNameValue,
-                        Symbol = documentRate.Key
-                    };
+                    var currencySymbol = documentRate.Key;
                     var rate = documentRate.Value;
-                    rates.Add(currencyAsProperty,rate);
+                    rates.Add(currencySymbol,rate);
                 }
                 var latestRates = new LatestRatesDto
                 {

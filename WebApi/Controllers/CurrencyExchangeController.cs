@@ -35,15 +35,13 @@ namespace WebApi.Controllers
         [HttpPost("convert/")]
         public async Task<IActionResult> GetCurrencyExchange([FromBody]CurrencyExchangeDto currencyExchangeDto)
         {
-            var domainBaseCurrency = 
-                await _getCurrencyService.GetBySymbol(currencyExchangeDto.BaseCurrencySymbol);
-            var domainTargetCurrency = 
-                await _getCurrencyService.GetBySymbol(currencyExchangeDto.TargetCurrencySymbol);
+            var domainBaseCurrencySymbol = Symbol.From(currencyExchangeDto.BaseCurrencySymbol);
+            var domainTargetCurrencySymbol = Symbol.From(currencyExchangeDto.TargetCurrencySymbol);
             var domainCurrencyAmount = Amount.From(currencyExchangeDto.BaseCurrencyAmount);
             var targetCurrencyAmount = 
                 await _getTargetCurrencyAmountService.GetAmount(
-                    domainBaseCurrency, 
-                    domainTargetCurrency, 
+                    domainBaseCurrencySymbol, 
+                    domainTargetCurrencySymbol, 
                     domainCurrencyAmount);
             return Ok(targetCurrencyAmount);
         }

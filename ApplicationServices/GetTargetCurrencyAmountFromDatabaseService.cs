@@ -16,8 +16,8 @@ namespace ApplicationServices
         }
 
         public async Task<double> GetAmount(
-            Currency baseCurrency,
-            Currency targetCurrency,
+            Symbol baseCurrency,
+            Symbol targetCurrency,
             Amount baseCurrencyAmount)
         {
             var latestRates = await _currencyExchangeRepository.GetLatestRates();

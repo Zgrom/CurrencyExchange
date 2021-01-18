@@ -30,7 +30,7 @@ async function getAllAvailableCurrencies() {
 async function getTargetCurrencyAmount(){
     document.getElementById('errorMessage').innerHTML = ''
     document.getElementById('targetCurrencyAmount').value = '';
-    const url='http://localhost:5000/CurrencyExchange/latest';
+    const urlConvert='http://localhost:5000/CurrencyExchange/convert';
     
     let baseCurrencySelect = document.getElementById('baseCurrency');
     let targetCurrencySelect= document.getElementById('targetCurrency');
@@ -40,7 +40,7 @@ async function getTargetCurrencyAmount(){
         TargetCurrencySymbol: targetCurrencySelect.value,
         BaseCurrencyAmount : baseCurrencyInput.value};
     
-    await fetch(url, {
+    await fetch(urlConvert, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

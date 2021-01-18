@@ -8,12 +8,8 @@ namespace CurrencyExchangeDomain.Tests
 {
     public sealed class CurrencyExchangeTests
     {
-        private readonly Currency _baseCurrency = Currency.Of(
-            Symbol.From("AFN"),
-            CurrencyName.From("Afghan Afghani"));
-        private readonly Currency _targetCurrency = Currency.Of(
-            Symbol.From("AED"),
-            CurrencyName.From("United Arab Emirates Dirham"));
+        private readonly Symbol _baseCurrencySymbol = Symbol.From("AFN");
+        private readonly Symbol _targetCurrencySymbol = Symbol.From("AED");
         private readonly Timestamp _timestampOld = Timestamp.From(123123);
         private readonly Timestamp _timestampNow = Timestamp.From(DateTimeOffset.Now.ToUnixTimeSeconds());
         private readonly Rate _rate = Rate.From(120.0);
@@ -23,16 +19,14 @@ namespace CurrencyExchangeDomain.Tests
         public void creating_CurrencyExchange_object_for_valid_arguments_value_should_be_successful()
         {
             var currencyExchange = CurrencyExchange.Of(
-                _baseCurrency,
-                _targetCurrency,
+                _baseCurrencySymbol,
+                _targetCurrencySymbol,
                 _timestampOld,
                 _rate,
                 _baseAmount);
 
-            currencyExchange.BaseCurrency.Symbol.SymbolValue.Should().Be("AFN");
-            currencyExchange.BaseCurrency.CurrencyName.CurrencyNameValue.Should().Be("Afghan Afghani");
-            currencyExchange.TargetCurrency.Symbol.SymbolValue.Should().Be("AED");
-            currencyExchange.TargetCurrency.CurrencyName.CurrencyNameValue.Should().Be("United Arab Emirates Dirham");
+            currencyExchange.BaseCurrency.SymbolValue.Should().Be("AFN");
+            currencyExchange.TargetCurrency.SymbolValue.Should().Be("AED");
             currencyExchange.Timestamp.TimestampValue.Should().Be(123123);
             currencyExchange.Rate.RateValue.Should().Be(120.0);
             currencyExchange.BaseCurrencyAmount.AmountValue.Should().Be(100.0);
@@ -44,7 +38,7 @@ namespace CurrencyExchangeDomain.Tests
         {
             Action action = () => CurrencyExchange.Of(
                 null,
-                _targetCurrency,
+                _targetCurrencySymbol,
                 _timestampOld,
                 _rate,
                 _baseAmount);
@@ -57,7 +51,7 @@ namespace CurrencyExchangeDomain.Tests
         public void creating_CurrencyExchange_object_for_null_TargetCurrency_value_should_fail()
         {
             Action action = () => CurrencyExchange.Of(
-                _baseCurrency,
+                _baseCurrencySymbol,
                 null,
                 _timestampOld,
                 _rate,
@@ -71,8 +65,8 @@ namespace CurrencyExchangeDomain.Tests
         public void creating_CurrencyExchange_object_for_null_Timestamp_value_should_fail()
         {
             Action action = () => CurrencyExchange.Of(
-                _baseCurrency,
-                _targetCurrency,
+                _baseCurrencySymbol,
+                _targetCurrencySymbol,
                 null,
                 _rate,
                 _baseAmount);
@@ -85,8 +79,8 @@ namespace CurrencyExchangeDomain.Tests
         public void creating_CurrencyExchange_object_for_null_Rate_value_should_fail()
         {
             Action action = () => CurrencyExchange.Of(
-                _baseCurrency,
-                _targetCurrency,
+                _baseCurrencySymbol,
+                _targetCurrencySymbol,
                 _timestampOld,
                 null,
                 _baseAmount);
@@ -99,8 +93,8 @@ namespace CurrencyExchangeDomain.Tests
         public void creating_CurrencyExchange_object_for_null_BaseAmount_value_should_fail()
         {
             Action action = () => CurrencyExchange.Of(
-                _baseCurrency,
-                _targetCurrency,
+                _baseCurrencySymbol,
+                _targetCurrencySymbol,
                 _timestampOld,
                 _rate,
                 null);
@@ -113,8 +107,8 @@ namespace CurrencyExchangeDomain.Tests
         public void if_timestamp_is_too_old_then_method_IsDataTooOld_should_return_true()
         {
             var currencyExchange = CurrencyExchange.Of(
-                _baseCurrency,
-                _targetCurrency,
+                _baseCurrencySymbol,
+                _targetCurrencySymbol,
                 _timestampOld,
                 _rate,
                 _baseAmount);
@@ -126,8 +120,8 @@ namespace CurrencyExchangeDomain.Tests
         public void if_timestamp_is_not_too_old_then_method_IsDataTooOld_should_return_false()
         {
             var currencyExchange = CurrencyExchange.Of(
-                _baseCurrency,
-                _targetCurrency,
+                _baseCurrencySymbol,
+                _targetCurrencySymbol,
                 _timestampNow,
                 _rate,
                 _baseAmount);

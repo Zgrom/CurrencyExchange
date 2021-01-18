@@ -5,16 +5,16 @@ namespace CurrencyExchangeDomain
 {
     public sealed class CurrencyExchange
     {
-        public Currency BaseCurrency { get; }
-        public Currency TargetCurrency { get; }
+        public Symbol BaseCurrency { get; }
+        public Symbol TargetCurrency { get; }
         public Timestamp Timestamp { get; }
         public Rate Rate { get; }
         public Amount BaseCurrencyAmount { get; }
         public Amount TargetCurrencyAmount { get; }
 
         private CurrencyExchange(
-            Currency baseCurrency,
-            Currency targetCurrency,
+            Symbol baseCurrency,
+            Symbol targetCurrency,
             Timestamp timestamp,
             Rate rate,
             Amount baseCurrencyAmount,
@@ -29,8 +29,8 @@ namespace CurrencyExchangeDomain
         }
 
         public static CurrencyExchange Of(
-            Currency baseCurrency,
-            Currency targetCurrency,
+            Symbol baseCurrency,
+            Symbol targetCurrency,
             Timestamp timestamp,
             Rate rate,
             Amount baseCurrencyAmount)

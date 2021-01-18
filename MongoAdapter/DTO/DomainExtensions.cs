@@ -6,41 +6,17 @@ namespace MongoAdapter.DTO
 {
     public static class DomainExtensions
     {
-        public static CurrencyExchangeDto ToDto(this CurrencyExchange currencyExchange)
-            => new CurrencyExchangeDto
-            {
-                Id = Guid.NewGuid().ToString(),
-                BaseCurrency = new CurrencyAsPropertyDto
-                {
-                    Symbol = currencyExchange.BaseCurrency.Symbol.SymbolValue,
-                    CurrencyName = currencyExchange.BaseCurrency.CurrencyName.CurrencyNameValue
-                },
-                TargetCurrency = new CurrencyAsPropertyDto
-                {
-                    Symbol = currencyExchange.TargetCurrency.Symbol.SymbolValue,
-                    CurrencyName = currencyExchange.TargetCurrency.CurrencyName.CurrencyNameValue
-                },
-                Timestamp = currencyExchange.Timestamp.TimestampValue,
-                Rate = currencyExchange.Rate.RateValue,
-            };
-
         public static LatestRatesDto ToDto(this LatestRates latestRates)
         {
             var id = Guid.NewGuid().ToString();
             var timestamp = latestRates.Timestamp.TimestampValue;
-            var rates = new Dictionary<CurrencyAsPropertyDto,double>();
+            var rates = new Dictionary<string,double>();
             foreach (var rate in latestRates.Rates)
             {
-                var currencySymbol = rate.Key.Symbol.SymbolValue;
-                var currencyName = rate.Key.CurrencyName.CurrencyNameValue;
-                var currency = new CurrencyAsPropertyDto
-                {
-                    Symbol = currencySymbol,
-                    CurrencyName = currencyName
-                };
+                var currencySymbol = rate.Key.SymbolValue;
                 var currencyRate = rate.Value.RateValue;
                 
-                rates.Add(currency,currencyRate);
+                rates.Add(currencySymbol,currencyRate);
             }
             return new LatestRatesDto
             {
