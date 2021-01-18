@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAvailableCurrencies()
         {
             var domainCurrencies = await _getAllAvailableCurrenciesService.GetAll();
             return Ok(domainCurrencies.Select(dc =>dc.ToDtoWebApi()).ToList());
