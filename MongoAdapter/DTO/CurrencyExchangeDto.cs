@@ -1,4 +1,3 @@
-using CurrencyExchangeDomain;
 
 namespace MongoAdapter.DTO
 {

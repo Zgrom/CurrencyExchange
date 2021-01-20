@@ -8,6 +8,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
         <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+        <PackageReference Include="Quartz.AspNetCore" Version="3.2.4" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
@@ -21,10 +22,21 @@
 
     <ItemGroup>
       <Compile Remove="WeatherForecast.cs" />
+      <Compile Remove="StartupAndScheduleMiddleware\**" />
+      <Compile Remove="Extensions\StartupAndScheduleMiddlewareExtension.cs" />
     </ItemGroup>
 
     <ItemGroup>
       <None Include="wwwroot\index.html" />
+      <None Remove="StartupAndScheduleMiddleware\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="StartupAndScheduleMiddleware\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="StartupAndScheduleMiddleware\**" />
     </ItemGroup>
 
 </Project>

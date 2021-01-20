@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CurrencyExchangeDomain;
 using MongoAdapter.DTO;
 using MongoDB.Driver;
 using Ports;
-using Ports.RepositoryExceptions;
 
 namespace MongoAdapter
 {
     public sealed class CurrencyExchangeRepository : ICurrencyExchangeRepository
     {
-        private readonly IMongoCollection<CurrencyExchangeDto> _currencyExchangeCollection;
         private readonly IMongoCollection<CurrencyDto> _availableCurrenciesCollection;
         private readonly IMongoCollection<LatestRatesDto> _latestRatesCollection;
         
@@ -20,8 +17,6 @@ namespace MongoAdapter
         {
             var mongoClient = new MongoClient(connectionUri);
             var database = mongoClient.GetDatabase(databaseName);
-            _currencyExchangeCollection = database
-                .GetCollection<CurrencyExchangeDto>(nameof(CurrencyExchangeDto));
             _latestRatesCollection = database
                 .GetCollection<LatestRatesDto>(nameof(LatestRatesDto));
             _availableCurrenciesCollection = database
@@ -34,7 +29,7 @@ namespace MongoAdapter
             var result = await cursor.FirstOrDefaultAsync();
             if (result == null)
             {
-                throw new NoValidCurrencyExchangeRateException();
+                return null;
             }
 
             return result.ToDomain();
@@ -59,6 +54,11 @@ namespace MongoAdapter
             {
                 await _availableCurrenciesCollection.InsertOneAsync(availableCurrency.ToDto());
             }
+        }
+
+        public async Task DeleteAllAvailableCurrencies()
+        {
+            await _availableCurrenciesCollection.DeleteManyAsync(_ => true);
         }
     }
 }

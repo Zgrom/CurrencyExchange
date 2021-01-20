@@ -11,12 +11,12 @@ using Ports;
 
 namespace FixerAdapter
 {
-    public class CurrencyExchangeWebServiceAdapter : ICurrencyExchangeWebServicePort
+    public class CurrencyExchangeWebServiceFixerAdapter : ICurrencyExchangeWebServicePort
     {
         private readonly string _uriAllAvailableCurrencies;
         private readonly string _uriLatestRates;
 
-        public CurrencyExchangeWebServiceAdapter(
+        public CurrencyExchangeWebServiceFixerAdapter(
             string uriAllAvailableCurrencies, 
             string uriLatestRates)
         {

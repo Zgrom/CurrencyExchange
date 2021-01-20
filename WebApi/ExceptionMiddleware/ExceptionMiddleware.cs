@@ -1,7 +1,6 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using ApplicationServices.ApplicationServicesExceptions;
 using CurrencyExchangeDomain.DomainExceptions;
 using Microsoft.AspNetCore.Http;
 using Ports.RepositoryExceptions;

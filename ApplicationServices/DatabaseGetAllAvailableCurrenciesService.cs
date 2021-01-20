@@ -5,11 +5,11 @@ using Ports;
 
 namespace ApplicationServices
 {
-    public sealed class GetAllAvailableCurrenciesFromDatabaseService
+    public sealed class DatabaseGetAllAvailableCurrenciesService
     {
         private readonly ICurrencyExchangeRepository _currencyExchangeRepository;
 
-        public GetAllAvailableCurrenciesFromDatabaseService(ICurrencyExchangeRepository currencyExchangeRepository)
+        public DatabaseGetAllAvailableCurrenciesService(ICurrencyExchangeRepository currencyExchangeRepository)
         {
             _currencyExchangeRepository = currencyExchangeRepository;
         }

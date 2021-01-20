@@ -13,6 +13,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+      <PackageReference Include="Quartz" Version="3.2.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,6 +22,25 @@
       <Compile Remove="GetTargetCurrencyExchangeFromWebService.cs" />
       <Compile Remove="InsertCurrencyExchangeService.cs" />
       <Compile Remove="DeleteCurrencyExchangeService.cs" />
+      <Compile Remove="ScheduleDatabaseService.cs" />
+      <Compile Remove="InsertLatestRatesService.cs" />
+      <Compile Remove="GetAllAvailableCurrenciesFromWebService.cs" />
+      <Compile Remove="GetAllAvailableCurrenciesService.cs" />
+      <Compile Remove="GetCurrencyService.cs" />
+      <Compile Remove="GetLatestRatesFromWebService.cs" />
+      <Compile Remove="GetTargetCurrencyAmountFromDatabaseService.cs" />
+      <Compile Remove="JsonDeserializeClasses\**" />
+      <Compile Remove="ApplicationServicesExceptions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="JsonDeserializeClasses\**" />
+      <EmbeddedResource Remove="ApplicationServicesExceptions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="JsonDeserializeClasses\**" />
+      <None Remove="ApplicationServicesExceptions\**" />
     </ItemGroup>
 
 </Project>

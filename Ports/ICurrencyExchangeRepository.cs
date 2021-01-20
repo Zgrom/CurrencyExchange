@@ -11,5 +11,6 @@ namespace Ports
         Task DeleteLatestRates(LatestRates latestRates);
         Task<List<Currency>> GetAllAvailableCurrencies();
         Task InsertAllAvailableCurrencies(List<Currency> allAvailableCurrencies);
+        Task DeleteAllAvailableCurrencies();
     }
 }

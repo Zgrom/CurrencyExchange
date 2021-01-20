@@ -12,23 +12,20 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class CurrencyExchangeController : ControllerBase
     {
-        private readonly GetAllAvailableCurrenciesService _getAllAvailableCurrenciesService;
-        private readonly GetCurrencyService _getCurrencyService;
+        private readonly DatabaseGetAllAvailableCurrenciesService _databaseGetAllAvailableCurrenciesService;
         private readonly GetTargetCurrencyAmountService _getTargetCurrencyAmountService;
         public CurrencyExchangeController(
-            GetAllAvailableCurrenciesService getAllAvailableCurrenciesService,
-            GetCurrencyService getCurrencyService,
+            DatabaseGetAllAvailableCurrenciesService databaseGetAllAvailableCurrenciesService,
             GetTargetCurrencyAmountService getTargetCurrencyAmountService)
         {
-            _getAllAvailableCurrenciesService = getAllAvailableCurrenciesService;
-            _getCurrencyService = getCurrencyService;
+            _databaseGetAllAvailableCurrenciesService = databaseGetAllAvailableCurrenciesService;
             _getTargetCurrencyAmountService = getTargetCurrencyAmountService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAvailableCurrencies()
         {
-            var domainCurrencies = await _getAllAvailableCurrenciesService.GetAll();
+            var domainCurrencies = await _databaseGetAllAvailableCurrenciesService.GetAll();
             return Ok(domainCurrencies.Select(dc =>dc.ToDtoWebApi()).ToList());
         }
 

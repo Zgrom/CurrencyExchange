@@ -8,4 +8,8 @@
       <ProjectReference Include="..\CurrencyExchangeDomain\CurrencyExchangeDomain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="RepositoryExceptions\NoValidCurrencyExchangeRateException.cs" />
+    </ItemGroup>
+
 </Project>

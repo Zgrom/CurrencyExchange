@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoAdapter;
 using Ports;
+using Quartz;
 using WebApi.Extensions;
 
 namespace WebApi
@@ -30,18 +31,36 @@ namespace WebApi
                     Configuration.GetValue<string>("Database:Connection.String"),
                     Configuration.GetValue<string>("Database:Database.Name")));
             services.AddSingleton<ICurrencyExchangeWebServicePort>(
-                sp => new CurrencyExchangeWebServiceAdapter(
+                sp => new CurrencyExchangeWebServiceFixerAdapter(
                     Configuration.GetValue<string>("Fixer.Io.Uris:Symbols"),
                     Configuration.GetValue<string>("Fixer.Io.Uris:Latest")));
-            services.AddSingleton<GetAllAvailableCurrenciesFromDatabaseService>();
-            services.AddSingleton<GetAllAvailableCurrenciesFromWebService>();
-            services.AddSingleton<GetAllAvailableCurrenciesService>();
+            services.AddSingleton<DatabaseGetAllAvailableCurrenciesService>();
             services.AddSingleton<DatabaseInsertAllAvailableCurrenciesService>();
-            services.AddSingleton<GetCurrencyService>();
+            services.AddSingleton<DatabaseDeleteAllAvailableCurrenciesService>();
+            services.AddSingleton<DatabaseGetLatestRatesService>();
+            services.AddSingleton<DatabaseInsertLatestRatesService>();
+            services.AddSingleton<DatabaseDeleteLatestRatesService>();
+            services.AddSingleton<WebGetAllAvailableCurrenciesService>();
+            services.AddSingleton<WebGetLatestRatesService>();
+            services.AddSingleton<InitializeDatabaseService>();
+            services.AddSingleton<DatabaseInsertAllAvailableCurrenciesService>();
             services.AddSingleton<GetTargetCurrencyAmountService>();
-            services.AddSingleton<GetTargetCurrencyAmountFromDatabaseService>();
-            services.AddSingleton<GetLatestRatesFromWebService>();
-            services.AddSingleton<InsertLatestRatesService>();
+            services.AddQuartz(q =>
+            {
+                q.UseMicrosoftDependencyInjectionJobFactory();
+                var jobKey = new JobKey("InitializeDatabaseJob");
+                q.AddJob<InitializeDatabaseService>(opts => opts.WithIdentity(jobKey));
+                q.AddTrigger(opts => opts
+                    .ForJob(jobKey) 
+                    .WithIdentity("InitializeDatabasedJob-trigger")
+                    .StartNow()
+                    .WithSimpleSchedule(
+                        ssb => ssb.WithIntervalInMinutes(1).RepeatForever()));
+            });
+            services.AddQuartzServer(options =>
+            {
+                options.WaitForJobsToComplete = true;
+            });
             services.AddControllers();
         }
 

@@ -46,11 +46,6 @@ namespace CurrencyExchangeDomain
             return Rate.From(targetCurrencyRate.RateValue/baseCurrencyRate.RateValue);
         }
 
-        public bool IsTooOld()
-        {
-            return Timestamp.IsTooOld();
-        }
-
         private bool Equals(LatestRates other)
         {
             return Equals(Timestamp, other.Timestamp);
