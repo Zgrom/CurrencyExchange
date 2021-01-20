@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <Compile Remove="DTO\CurrencyAsPropertyDto.cs" />
+      <Compile Remove="DTO\CurrencyExchangeDto.cs" />
     </ItemGroup>
 
 </Project>
